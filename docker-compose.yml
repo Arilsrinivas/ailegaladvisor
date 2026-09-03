@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nyaya_legal_api
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://nyaya_user:nyaya_secure_pass@db:5432/nyaya_db
+      - REDIS_URL=redis://cache:6379/0
+      - SECRET_KEY=nyaya-super-secret-production-key-2026
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_started
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+
+  db:
+    image: postgres:15-alpine
+    container_name: nyaya_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: nyaya_user
+      POSTGRES_PASSWORD: nyaya_secure_pass
+      POSTGRES_DB: nyaya_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nyaya_user -d nyaya_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  cache:
+    image: redis:7-alpine
+    container_name: nyaya_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:

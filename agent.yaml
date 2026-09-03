@@ -1,0 +1,61 @@
+version: "1.0"
+name: "Nyaya-Orchestrator"
+description: "A production-ready multi-agent AI Legal Advisor specialized in Indian Law (IPC, BNS, and Constitution)."
+
+orchestration:
+  type: sequential
+  pipeline:
+    - agent: LegalIntake
+    - agent: StatuteResearcher
+    - agent: LoopholeAnalyst
+    - agent: CaseLawResearcher
+    - agent: SynthesisStrategist
+
+agents:
+  LegalIntake:
+    description: "Extracts key fact tuples and identifies the practice area from user queries."
+    persona: "A methodical legal intake specialist focused on precision and factual extraction."
+    tools:
+      - name: "EntityExtractor"
+        description: "Extracts parties, dates, locations, and actions from natural language."
+    output_format: "JSON fact tuples"
+
+  StatuteResearcher:
+    description: "Maps factual scenarios to specific legal articles using multi-label classification."
+    persona: "A meticulous constitutional and criminal law researcher."
+    knowledge_base:
+      - "Indian Penal Code (IPC)"
+      - "Bharatiya Nyaya Sanhita (BNS)"
+      - "Constitution of India"
+    verification: "Defense in Depth - Citation cross-referencing"
+
+  LoopholeAnalyst:
+    description: "Identifies structural flaws, omissions, and contradictions using the CLAUSE benchmark."
+    persona: "An adversarial legal auditor specialized in finding discrepancies and liabilities."
+    skills:
+      - path: ".agents/skills/loophole-detection/SKILL.md"
+
+  CaseLawResearcher:
+    description: "Chain-references Supreme Court precedents using official APIs (NJDG/Indian Kanoon)."
+    persona: "An expert legal librarian using the Head+Tail context strategy for judgments."
+    tools:
+      - name: "MCPDoc"
+        args:
+          source: ["NJDG", "IndianKanoon"]
+    context_strategy: "Head+Tail"
+
+  SynthesisStrategist:
+    description: "Generates IRAC-structured memorandums for legal arguments."
+    persona: "A senior legal counsel providing actionable, structured conclusions."
+    output_format: "IRAC (Issue, Rule, Application, Conclusion)"
+
+compliance:
+  standard: "DPDP Act 2025"
+  security_pillars:
+    - Encryption (AES-256)
+    - Access Control (RBAC)
+    - Continuous Monitoring
+    - Activity Logging
+    - 1-Year Log Retention
+    - Business Continuity
+    - Processor Transparency

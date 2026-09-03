@@ -1,0 +1,31 @@
+[
+  {
+    "id": "QA_001",
+    "query": "What is the punishment for murder under the new BNS code?",
+    "expected_statute": "BNS Section 103",
+    "legacy_statute": "IPC Section 302",
+    "practice_area": "Criminal Law"
+  },
+  {
+    "id": "QA_002",
+    "query": "Does the right to privacy fall under Article 21 of the Constitution?",
+    "expected_statute": "Article 21",
+    "legacy_statute": "N/A",
+    "practice_area": "Constitutional Law",
+    "precedent": "Justice K. S. Puttaswamy (Retd.) v. Union of India"
+  },
+  {
+    "id": "QA_003",
+    "query": "What constitutes 'Theft' in the Bharatiya Nyaya Sanhita?",
+    "expected_statute": "BNS Section 303",
+    "legacy_statute": "IPC Section 378",
+    "practice_area": "Criminal Law"
+  },
+  {
+    "id": "QA_004",
+    "query": "Mandatory security safeguards under DPDP Act 2023 for data fiduciaries?",
+    "expected_statute": "DPDP Section 8(5)",
+    "legacy_statute": "N/A",
+    "practice_area": "Data Privacy"
+  }
+]
