@@ -1,0 +1,14 @@
+{
+  "name": "nyaya-ai-legal-advisor",
+  "version": "2.0.0",
+  "description": "AI-Powered Multilingual Legal Assistance Platform for the Indian Judiciary",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "python run_app.py",
+    "test": "python tests/test_api.py"
+  },
+  "keywords": ["legal-ai", "india", "bns", "bnss", "rag", "fastapi", "react"],
+  "author": "Nyaya AI Team",
+  "license": "MIT"
+}

@@ -104,12 +104,13 @@ def get_document(
     return doc
 
 @router.post("/analyze-text")
+@router.post("/summarize")
 def analyze_raw_text(
     payload: dict,
     db: Session = Depends(get_db),
     current_user: Optional[User] = Depends(get_current_user)
 ):
-    raw_text = payload.get("text", "")
+    raw_text = payload.get("text") or payload.get("content") or ""
     title = payload.get("title", "Contract Agreement")
     if not raw_text.strip():
         raise HTTPException(status_code=400, detail="Text cannot be empty.")
